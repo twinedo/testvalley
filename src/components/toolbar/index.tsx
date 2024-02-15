@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import React from 'react';
-import { IoIosMenu } from 'react-icons/io';
 import Input from '../input';
 
 function Toolbar() {
@@ -16,9 +15,11 @@ function Toolbar() {
 						alt='logo'
 					/>
 					<div className='flex row gap-1 text-[#00D094] text-[16px]'>
-						<img
+						<Image
 							src='https://www.testvalley.kr/common/icon-category.svg'
-							className='w-4 h-4'
+							width={16}
+							height={16}
+							alt='category'
 						/>
 						카테고리
 					</div>
@@ -54,7 +55,7 @@ function Toolbar() {
 						alt='vertical-bar'
 						className='mr-[12px]'
 					/>
-					<button className='text-center text-gray-700 text-sm font-medium leading-4'>
+					<button className='text-center text-gray-700 text-sm'>
 						로그인 / 회원가입
 					</button>
 				</div>

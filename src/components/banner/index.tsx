@@ -5,6 +5,8 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa6';
+import Image from 'next/image';
+import { TBanner } from '../../../declaration';
 
 const SwiperButtonNext = () => {
 	const swiper = useSwiper();
@@ -41,33 +43,17 @@ export default function Banner() {
 		},
 	};
 
-	const [banners, setBanners] = useState([]);
+	const [banners, setBanners] = useState<TBanner[]>([]);
 
 	useEffect(() => {
-		fetch('https://api.testvalley.kr/main-banner/all').then(async (res) => {
-			const response = await res.json();
+		fetch(`${process.env.BASE_URL}/main-banner/all`).then(async (res) => {
+			const response = (await res.json()) as TBanner[];
 			setBanners(response);
 		});
 	}, []);
 
-	const [autoplayEnabled, setAutoplayEnabled] = useState(true);
-
-	const swiper = useSwiper();
-
-	useEffect(() => {
-		if (autoplayEnabled) {
-			swiper?.autoplay?.start();
-		} else {
-			swiper?.autoplay?.stop();
-		}
-
-		return () => {
-			swiper?.autoplay?.stop();
-		};
-	}, [autoplayEnabled, swiper]);
-
 	return (
-		<div className='relative z-[2px] w-full border h-[320px]'>
+		<div className='relative z-[2px] w-full h-[320px]'>
 			<Swiper
 				className='h-[320px] flex justify-center items-center bg-blue'
 				modules={[Autoplay, Pagination]}
@@ -81,7 +67,12 @@ export default function Banner() {
 				{banners.map((o, i) => (
 					<div key={i.toString()}>
 						<SwiperSlide className='flex justify-center items-center'>
-							<img src={o?.pcImageUrl} className='w-full h-full' />
+							<Image
+								src={o?.pcImageUrl}
+								className='w-full h-full'
+								fill
+								alt='banner'
+							/>
 						</SwiperSlide>
 					</div>
 				))}
@@ -91,5 +82,3 @@ export default function Banner() {
 		</div>
 	);
 }
-
-// export default Banner;

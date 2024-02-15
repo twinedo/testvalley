@@ -1,9 +1,4 @@
-import React, {
-	HTMLInputTypeAttribute,
-	InputHTMLAttributes,
-	ReactElement,
-	ReactNode,
-} from 'react';
+import React, { InputHTMLAttributes, ReactNode } from 'react';
 
 type TInput = {
 	prefix?: ReactNode;

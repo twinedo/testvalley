@@ -1,33 +1,33 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
-import { Swiper, SwiperRef, SwiperSlide, useSwiper } from 'swiper/react';
+import React, { useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa6';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { Swiper as SwiperType } from 'swiper/types';
+import Image from 'next/image';
+import { TItemsCollection, TResCollections } from '../../../declaration';
 
 function Collections() {
-	const [data, setData] = useState([]);
+	const [data, setData] = useState<TItemsCollection[]>([]);
 
 	useEffect(() => {
-		fetch(
-			'https://api.testvalley.kr/collections?type=SINGLE&viewType=TILE'
-		).then(async (res) => {
-			// console.log('ressss', await res.json());
-			const response = await res.json();
-			const filtered = response.items.filter(
-				(o) => o.type === 'SINGLE' && o.viewType === 'TILE'
-			);
-			console.log('filtererd', filtered);
-			setData(filtered);
-		});
+		fetch(`${process.env.BASE_URL}/collections?type=SINGLE&viewType=TILE`).then(
+			async (res) => {
+				const response = (await res.json()) as TResCollections;
+				const filtered = response.items.filter(
+					(o) => o.type === 'SINGLE' && o.viewType === 'TILE'
+				) as TItemsCollection[];
+				setData(filtered);
+			}
+		);
 
 		return () => {};
 	}, []);
 
 	return (
-		<div className='w-full flex flex-col max-w-[960px] md:mt-[50px] md:p-0 h-full min-h-screen'>
+		<div className='w-full flex flex-col max-w-[960px] md:p-0 h-full min-h-screen'>
 			{data.map((o) => (
 				<CollectionsItems key={o.id.toString()} o={o} />
 			))}
@@ -35,8 +35,7 @@ function Collections() {
 	);
 }
 
-function CollectionsItems({ o }) {
-	// const refSwiper = useRef<SwiperType>();
+function CollectionsItems({ o }: { o: TItemsCollection }) {
 	const [swiper, setSwiper] = useState<SwiperType>();
 	const [allowPrev, setAllowPrev] = useState(false);
 	const [allowNext, setAllowNext] = useState(false);
@@ -80,8 +79,11 @@ function CollectionsItems({ o }) {
 						<SwiperSlide
 							key={item?.uuid}
 							className='flex justify-center items-center w-[174px] max-w-[174px] h-full mr-2'>
-							<img
+							<Image
 								src={item?.publication?.media[0]?.uri}
+								width={174}
+								height={174}
+								alt='media'
 								className='w-[174px] h-[174px]'
 							/>
 							<div className='text-[15px] mt-[4px] text-[#333333]'>
@@ -101,17 +103,23 @@ function CollectionsItems({ o }) {
 								</div>
 							)}
 							<div className='flex flex-row text-[12px] mt-[8px] items-center'>
-								<img
+								<Image
 									src='https://www.testvalley.kr/star/star-darkgray.svg'
 									className='w-[12px] h-[12px]'
+									width={12}
+									height={12}
+									alt='star'
 								/>
 								<div>{item?.publication?.rating ?? '0'}</div>
 							</div>
 							{item?.publication?.preface && (
 								<div className='mt-8 text-xs px-[6px] py-1 inline-flex items-center border border-gray-200 rounded-md'>
-									<img
+									<Image
 										src={item?.publication?.prefaceIconUrl}
 										className='w-[14px] h-[14px]'
+										width={14}
+										height={14}
+										alt='icon-preface'
 									/>
 									<div>{item?.publication?.preface ?? '-'}</div>
 								</div>
