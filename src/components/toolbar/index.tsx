@@ -15,8 +15,11 @@ function Toolbar() {
 						height={25}
 						alt='logo'
 					/>
-					<div className='flex row gap-1 text-[#00D094]'>
-						<IoIosMenu color='#00D094' size={16} />
+					<div className='flex row gap-1 text-[#00D094] text-[16px]'>
+						<img
+							src='https://www.testvalley.kr/common/icon-category.svg'
+							className='w-4 h-4'
+						/>
 						카테고리
 					</div>
 					<Input

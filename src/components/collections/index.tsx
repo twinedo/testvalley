@@ -26,8 +26,6 @@ function Collections() {
 		return () => {};
 	}, []);
 
-	const refSwiper = useRef<SwiperType>();
-
 	return (
 		<div className='w-full flex flex-col max-w-[960px] md:mt-[50px] md:p-0 h-full min-h-screen'>
 			{data.map((o) => (
@@ -58,10 +56,10 @@ function CollectionsItems({ o }) {
 			className='relative overflow-hidden w-full flex h-full md:flex-row mt-[56px] '>
 			<div className='md:w-[240px] md:h-[326px] absolute z-1 pr-[40px] pb-[20px] bg-white flex flex-col justify-between'>
 				<div>
-					<div className='font-semibold text-base text-gray-700 overflow-hidden overflow-ellipsis whitespace-normal break-words line-clamp-2 leading-6'>
+					<div className='font-semibold text-[24px] leading-[32px]'>
 						{o?.title ?? ''}
 					</div>
-					<div className='mt-[8px] font-medium text-sm text-gray-600 w-full overflow-hidden overflow-ellipsis break-words line-clamp-2 leading-5'>
+					<div className='mt-[8px] font-medium text-sm text-gray-600 w-full overflow-ellipsis break-words line-clamp-2 leading-5'>
 						{o?.subtitle ?? ''}
 					</div>
 				</div>
@@ -86,30 +84,38 @@ function CollectionsItems({ o }) {
 								src={item?.publication?.media[0]?.uri}
 								className='w-[174px] h-[174px]'
 							/>
-							<div>{item?.publication?.title}</div>
-							<div>
+							<div className='text-[15px] mt-[4px] text-[#333333]'>
+								{item?.publication?.title}
+							</div>
+							<div className='mt-[8px] text-[18px]'>
 								<span className='text-[#FF5023]'>
 									{item?.publication?.priceInfo?.discountRate ?? '0'}%
 								</span>
-								{item?.publication?.priceInfo?.discountPrice ?? '0'}원
+								{item?.publication?.priceInfo?.discountPrice?.toLocaleString() ??
+									'0'}
+								<span className='text-[12px]'>원</span>
 							</div>
-							<div className='inline-block px-4 py-3 mr-4 font-semibold text-xs leading-3 text-center text-red-700 bg-red-100 rounded-md'>
-								{item?.publication?.tagsOnDesc.toString()}
-							</div>
-							<div className='flex flex-row items-center'>
+							{item?.publication?.tagsOnDesc?.length > 0 && (
+								<div className='mt-[8px] inline-block px-[4px] py-[3px] mr-4 font-semibold text-xs leading-3 text-center text-red-700 bg-red-100 rounded-md'>
+									{item?.publication?.tagsOnDesc.toString()}
+								</div>
+							)}
+							<div className='flex flex-row text-[12px] mt-[8px] items-center'>
 								<img
 									src='https://www.testvalley.kr/star/star-darkgray.svg'
 									className='w-[12px] h-[12px]'
 								/>
 								<div>{item?.publication?.rating ?? '0'}</div>
 							</div>
-							<div className='mt-8 text-xs px-[6px] py-1 inline-flex items-center border border-gray-200 rounded-md'>
-								<img
-									src={item?.publication?.prefaceIconUrl}
-									className='w-[14px] h-[14px]'
-								/>
-								<div>{item?.publication?.preface ?? '-'}</div>
-							</div>
+							{item?.publication?.preface && (
+								<div className='mt-8 text-xs px-[6px] py-1 inline-flex items-center border border-gray-200 rounded-md'>
+									<img
+										src={item?.publication?.prefaceIconUrl}
+										className='w-[14px] h-[14px]'
+									/>
+									<div>{item?.publication?.preface ?? '-'}</div>
+								</div>
+							)}
 						</SwiperSlide>
 					))}
 			</Swiper>

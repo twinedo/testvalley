@@ -19,7 +19,7 @@ function Shortcuts() {
 			{data.map((o, i) => (
 				<div
 					key={o?.sort ?? i}
-					className='flex flex-col gap-[8px]  justify-center items-center'>
+					className='flex flex-col gap-[8px] text-[13px] justify-center items-center'>
 					<img src={o?.imageUrl} className='w-[62px] h-[62px]' />
 					{o?.title ?? 'Shortcut'}
 				</div>
