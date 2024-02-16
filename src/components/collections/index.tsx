@@ -88,6 +88,7 @@ function CollectionsItems({ o }: { o: TItemsCollection }) {
 					width: swiperWidth >= 960 ? 'calc(100% - 240px)' : '100%',
 					marginRight: 0,
 					marginLeft: 240,
+					display: swiperWidth >= 960 ? 'flex' : 'none',
 				}}
 				autoplay={{ delay: 3000, disableOnInteraction: false }}>
 				{o?.items &&
