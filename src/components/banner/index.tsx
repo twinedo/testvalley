@@ -92,7 +92,7 @@ export default function Banner() {
 				</div>
 
 				{banners.map((o, i) => (
-					<SwiperSlide key={o.mainBannerId.toString()} className='lg:ml-3 mr-0'>
+					<SwiperSlide key={o.mainBannerId.toString()} className=' mr-0'>
 						<Image
 							src={o?.pcImageUrl ?? ''}
 							// width={420}
