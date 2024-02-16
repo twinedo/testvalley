@@ -61,8 +61,8 @@ export default function Banner() {
 				modules={[Autoplay, Pagination]}
 				pagination={pagination}
 				scrollbar={{ draggable: true }}
-				spaceBetween={40}
-				slidesPerView={2.1}
+				spaceBetween={30}
+				slidesPerView={1.33}
 				centeredSlides
 				watchOverflow
 				loop={true}
@@ -72,13 +72,13 @@ export default function Banner() {
 						spaceBetween: 20,
 					},
 					960: {
-						slidesPerView: 1.3,
-						spaceBetween: 20,
+						slidesPerView: 1.33,
+						spaceBetween: 30,
 					},
-					1440: {
-						slidesPerView: 1.5,
-						spaceBetween: 10,
-					},
+					// 1440: {
+					// 	slidesPerView: 1.5,
+					// 	spaceBetween: 10,
+					// },
 				}}
 				onRealIndexChange={(swiper) => {
 					setCurrentIdx(swiper.realIndex);
