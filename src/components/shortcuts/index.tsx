@@ -14,19 +14,28 @@ function Shortcuts() {
 	}, []);
 
 	return (
-		<div className='w-full grid grid-cols-5 md:grid-cols-10 gap-2 py-4 mt-[40px] items-center justify-center'>
+		<div className='w-full grid grid-cols-5 gap-x-[24px] gap-y-[12px] md:grid-cols-10 gap-2 px-5 md:px-0 py-4 md:mt-[40px] items-center justify-between'>
 			{data.map((o, i) => (
 				<div
 					key={o?.sort ?? i}
-					className='flex flex-col gap-[8px] text-[13px] justify-center items-center'>
+					className='flex flex-col gap-[8px] justify-center items-center'>
 					<Image
 						src={o?.imageUrl}
-						className='w-[62px] h-[62px]'
+						className='flex md:hidden w-[48px] h-[48px]'
+						width={48}
+						height={48}
+						alt='shortcut'
+					/>
+					<Image
+						src={o?.imageUrl}
+						className='hidden md:flex w-[62px] h-[62px]'
 						width={62}
 						height={62}
 						alt='shortcut'
 					/>
-					{o?.title ?? 'Shortcut'}
+					<div className='text-[11px] md:text-[13px]'>
+						{o?.title ?? 'Shortcut'}
+					</div>
 				</div>
 			))}
 		</div>

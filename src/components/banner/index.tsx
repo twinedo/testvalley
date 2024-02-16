@@ -13,7 +13,7 @@ const SwiperButtonNext = () => {
 
 	return (
 		<button
-			className='w-11 h-11 p-[10px] bg-[#33333380] flex justify-center items-center rounded-full absolute text-white top-[140px] right-3 z-10'
+			className='w-11 h-11 p-[10px] bg-[#33333380] flex justify-center items-center rounded-full  text-white top-[140px] z-10'
 			onClick={() => swiper.slideNext()}>
 			<FaChevronRight color='white' size={24} />
 		</button>
@@ -24,7 +24,7 @@ const SwiperButtonPrevious = () => {
 	const swiper = useSwiper();
 	return (
 		<button
-			className='w-11 h-11 p-[10px] bg-[#33333380] flex justify-center items-center rounded-full absolute text-white top-[140px] left-3 z-10'
+			className='w-11 h-11 p-[10px] bg-[#33333380] flex justify-center items-center rounded-full text-white top-[140px] z-10'
 			onClick={() => swiper.slidePrev()}>
 			<FaChevronLeft color='white' size={24} />
 		</button>
@@ -52,32 +52,68 @@ export default function Banner() {
 		});
 	}, []);
 
+	const [currentIdx, setCurrentIdx] = useState(0);
+
 	return (
-		<div className='relative z-[2px] w-full h-[320px]'>
+		<div className='relative w-full h-[210px] md:h-[320px]'>
 			<Swiper
-				className='h-[320px] flex justify-center items-center bg-blue'
+				className='h-[210px] md:h-[320px] mx-auto overflow-visible'
 				modules={[Autoplay, Pagination]}
 				pagination={pagination}
 				scrollbar={{ draggable: true }}
-				spaceBetween={50}
-				slidesPerView={1}
+				spaceBetween={40}
+				slidesPerView={2.1}
+				centeredSlides
+				watchOverflow
 				loop={true}
+				breakpoints={{
+					320: {
+						slidesPerView: 1,
+						spaceBetween: 20,
+					},
+					960: {
+						slidesPerView: 1.3,
+						spaceBetween: 20,
+					},
+					1440: {
+						slidesPerView: 1.5,
+						spaceBetween: 10,
+					},
+				}}
+				onRealIndexChange={(swiper) => {
+					setCurrentIdx(swiper.realIndex);
+				}}
 				autoplay={{ delay: 3000, disableOnInteraction: false }}>
-				<SwiperButtonNext />
-				{banners.map((o, i) => (
-					<div key={i.toString()}>
-						<SwiperSlide className='flex justify-center items-center'>
-							<Image
-								src={o?.pcImageUrl}
-								className='w-full h-full'
-								fill
-								alt='banner'
-							/>
-						</SwiperSlide>
+				<div className=' w-full absolute z-30 hidden md:block md:top-[140px] h-[320px] mx-auto'>
+					<div className='max-w-[960px] min-w-[320px] px-4 mx-auto flex flex-row items-center justify-between'>
+						<SwiperButtonPrevious />
+						<SwiperButtonNext />
 					</div>
-				))}
+				</div>
 
-				<SwiperButtonPrevious />
+				{banners.map((o, i) => (
+					<SwiperSlide key={o.mainBannerId.toString()} className='lg:ml-3 mr-0'>
+						<Image
+							src={o?.pcImageUrl ?? ''}
+							// width={420}
+							// height={210}
+							alt='banner'
+							priority
+							fill
+							className='flex md:hidden'
+						/>
+						<Image
+							src={o?.pcImageUrl ?? ''}
+							// width={960}
+							// height={320}
+							alt='banner'
+							priority
+							fill
+							className='hidden md:flex'
+							style={{ opacity: i === currentIdx ? 1 : 0.4 }}
+						/>
+					</SwiperSlide>
+				))}
 			</Swiper>
 		</div>
 	);

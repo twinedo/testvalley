@@ -17,7 +17,7 @@ function Input({
 	return (
 		<div
 			className={
-				'flex relative bg-white row items-center h-[42px] py-[9px] px-[40px] justify-center border border-gray-300 rounded-[4px] focus:outline-none hover:border-[#00D094] focus:border-[#00D094]' +
+				'flex relative bg-white row items-center h-[42px] py-[9px] px-[40px] w-[335px] ml-[70px] justify-center border border-gray-300 rounded-[4px] focus:outline-none hover:border-[#00D094] focus:border-[#00D094]' +
 				' ' +
 				containerStyle
 			}>

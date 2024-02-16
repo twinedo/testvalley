@@ -65,7 +65,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en' className={pretendard.className}>
-			<body className={pretendard.className}>{children}</body>
+			<body className={pretendard.className + ' flex justify-center'}>
+				{children}
+			</body>
 		</html>
 	);
 }
