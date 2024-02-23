@@ -4,7 +4,7 @@ import Input from '../input';
 
 function Toolbar() {
 	return (
-		<div className='sticky top-0 w-full h-[55px] md:h-[72px] bg-white z-10 border-b border-solid border-gray-300    '>
+		<div className='md:sticky top-0 w-full h-[55px] md:h-[72px] bg-white z-10 border-b border-solid border-gray-300    '>
 			<div className='flex relative items-center justify-between max-w-[960px] h-full my-0 mx-auto'>
 				<div className='flex ml-5 md:ml-0 items-center justify-between md:justify-normal gap-4'>
 					<div className='flex flex-row items-center'>

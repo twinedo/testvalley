@@ -96,14 +96,30 @@ function CollectionsItems({ o }: { o: TItemsCollection }) {
 						<SwiperSlide
 							key={item?.uuid}
 							className='hidden md:flex justify-center items-center w-[174px] h-full mr-2'>
-							<Image
-								src={item?.publication?.media[0]?.uri}
-								width={174}
-								height={174}
-								alt='media'
-								// fill
-								className='w-[174px] h-[174px]'
-							/>
+							<div className='relative'>
+								<Image
+									src={item?.publication?.media[0]?.uri}
+									width={174}
+									height={174}
+									alt='media'
+									// fill
+									className='w-[174px] h-[174px]'
+								/>
+								{item?.publication?.tagsOnImage?.length > 0 && (
+									<div className='flex row gap-2 items-center bg-[#009E8A] p-1 rounded-[2px] absolute bottom-1 left-1'>
+										<Image
+											src='https://www.testvalley.kr/common/return-new.svg'
+											width={10}
+											height={10}
+											priority
+											alt='return'
+										/>
+										<div className='text-white text-[12px]'>
+											{item?.publication?.tagsOnImage.toString()}
+										</div>
+									</div>
+								)}
+							</div>
 							<div className='text-[15px] mt-[4px] text-[#333333]'>
 								{item?.publication?.title}
 							</div>

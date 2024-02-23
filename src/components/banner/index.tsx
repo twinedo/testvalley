@@ -75,10 +75,10 @@ export default function Banner() {
 						slidesPerView: 1.33,
 						spaceBetween: 30,
 					},
-					// 1440: {
-					// 	slidesPerView: 1.5,
-					// 	spaceBetween: 10,
-					// },
+					1440: {
+						slidesPerView: 1.5,
+						spaceBetween: 10,
+					},
 				}}
 				onRealIndexChange={(swiper) => {
 					setCurrentIdx(swiper.realIndex);
